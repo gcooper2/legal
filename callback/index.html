@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Authorization Complete</title>
+      <style>
+          body { font-family: -apple-system, sans-serif; max-width: 600px; margin: 80px auto; padding: 0 20px; }
+          .code-box { background: #f4f4f4; border: 1px solid #ddd; border-radius: 6px; padding: 16px; margin: 16px 0; word-break: break-all; font-family: monospace; font-size:
+  14px; }
+          .label { font-weight: bold; margin-top: 12px; }
+      </style>
+  </head>
+  <body>
+      <h1>Authorization Complete</h1>
+      <p>Copy the values below and paste them to your assistant.</p>
+      <div id="params"></div>
+      <noscript><p>Copy the full URL from your browser's address bar.</p></noscript>
+      <script>
+          const params = new URLSearchParams(window.location.search);
+          const container = document.getElementById('params');
+          const show = (label, value) => {
+              if (!value) return;
+              const d = document.createElement('div');
+              d.innerHTML = `<div class="label">${label}</div><div class="code-box">${value}</div>`;
+              container.appendChild(d);
+          };
+          show('Code', params.get('code'));
+          show('Realm ID', params.get('realmId'));
+          show('State', params.get('state'));
+          if (!params.get('code')) {
+              container.innerHTML = '<p>No authorization code found. Copy the full URL from your address bar.</p>';
+          }
+      </script>
+  </body>
+  </html>
